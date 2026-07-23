@@ -24,19 +24,19 @@ The project covers the entire ML lifecycle—from **data preprocessing and explo
 ### 🌐 Web Application
 
 
-**🔗 Live Link:**
+**🔗https://loan-default-prediction-6sqs.onrender.com**
 
 ```
 👉 https://loan-default-prediction-6sqs.onrender.com
 ```
 
-*(Replace the above URL after deploying on Render, Railway, AWS, etc.)*
+
 
 ---
 
 # 📸 Project Preview
 
-> Add screenshots here after deployment.
+> .
 
 ```
 images/
@@ -48,11 +48,7 @@ images/
 Example:
 
 ```md
-![Home](images/homepage.png)
 
-![Prediction](images/prediction.png)
-
-![Swagger](images/swagger.png)
 ```
 
 ---
