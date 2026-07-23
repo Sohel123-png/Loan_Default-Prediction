@@ -1,0 +1,12 @@
+numpy
+pandas
+seaborn
+matplotlib
+scikit-learn==1.9.0
+xgboost
+lightgbm
+catboost
+joblib
+fastapi
+uvicorn[standard]
+pydantic

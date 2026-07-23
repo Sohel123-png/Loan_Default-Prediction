@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ledger &mdash; Loan Underwriting Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<div class="desk">
+
+  <header class="desk__header">
+    <div class="desk__brand">
+      <span class="desk__brand-mark">§</span>
+      <div>
+        <h1>Ledger</h1>
+        <p class="desk__tagline">Underwriting Desk &mdash; Credit Risk Review</p>
+      </div>
+    </div>
+    <div class="desk__model-tag" id="modelTag">
+      <span class="dot" id="modelDot"></span>
+      <span id="modelName">connecting to desk&hellip;</span>
+    </div>
+  </header>
+
+  <main class="desk__body">
+
+    <!-- LEFT: Intake Form -->
+    <section class="ledger-card intake">
+      <div class="ledger-card__eyebrow">Applicant File No. <span id="fileNo">—</span></div>
+      <h2>Application Intake</h2>
+
+      <form id="loanForm">
+
+        <div class="field-row">
+          <div class="field">
+            <label for="person_age">Age</label>
+            <input type="number" id="person_age" required min="18" max="100" value="28" />
+          </div>
+          <div class="field">
+            <label for="person_income">Annual income ($)</label>
+            <input type="number" id="person_income" required min="1" value="70000" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="person_home_ownership">Home ownership</label>
+            <select id="person_home_ownership">
+              <option value="RENT">Rent</option>
+              <option value="MORTGAGE">Mortgage</option>
+              <option value="OWN">Own</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="person_emp_length">Employment length (yrs)</label>
+            <input type="number" id="person_emp_length" required min="0" max="70" step="0.5" value="5" />
+          </div>
+        </div>
+
+        <div class="ledger-divider"></div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="loan_intent">Loan purpose</label>
+            <select id="loan_intent">
+              <option value="EDUCATION">Education</option>
+              <option value="MEDICAL">Medical</option>
+              <option value="VENTURE">Venture</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="DEBTCONSOLIDATION">Debt consolidation</option>
+              <option value="HOMEIMPROVEMENT">Home improvement</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="loan_grade">Loan grade</label>
+            <select id="loan_grade">
+              <option>A</option><option selected>B</option><option>C</option>
+              <option>D</option><option>E</option><option>F</option><option>G</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="loan_amnt">Requested amount ($)</label>
+            <input type="number" id="loan_amnt" required min="1" value="12000" />
+          </div>
+          <div class="field">
+            <label for="loan_int_rate">Interest rate (%)</label>
+            <input type="number" id="loan_int_rate" required min="0" max="50" step="0.1" value="10.5" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="loan_percent_income">Loan / income ratio</label>
+            <input type="number" id="loan_percent_income" required min="0" max="1" step="0.01" value="0.17" />
+          </div>
+          <div class="field">
+            <label for="cb_person_cred_hist_length">Credit history (yrs)</label>
+            <input type="number" id="cb_person_cred_hist_length" required min="0" max="60" value="4" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Prior default on file?</label>
+          <div class="toggle-row">
+            <label class="toggle"><input type="radio" name="default_on_file" value="N" checked><span>No</span></label>
+            <label class="toggle"><input type="radio" name="default_on_file" value="Y"><span>Yes</span></label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          Send file for review
+        </button>
+        <p class="form-error" id="formError"></p>
+      </form>
+    </section>
+
+    <!-- RIGHT: Verdict -->
+    <section class="ledger-card verdict">
+      <div class="ledger-card__eyebrow">Underwriting Verdict</div>
+
+      <div id="emptyState" class="empty-state">
+        <div class="empty-state__icon">✒</div>
+        <p>File a submission on the left.<br>The desk will stamp its decision here.</p>
+      </div>
+
+      <div id="loadingState" class="loading-state hidden">
+        <div class="loading-state__pen"></div>
+        <p>Reviewing file&hellip;</p>
+      </div>
+
+      <div id="resultState" class="result-state hidden">
+        <div class="stamp-zone">
+          <div class="stamp" id="stampEl">APPROVED</div>
+        </div>
+
+        <div class="result-metrics">
+          <div class="result-metric">
+            <span class="result-metric__label">Default probability</span>
+            <span class="result-metric__value mono" id="probValue">0.00%</span>
+          </div>
+          <div class="result-metric">
+            <span class="result-metric__label">Risk tier</span>
+            <span class="result-metric__value" id="riskValue">&mdash;</span>
+          </div>
+        </div>
+
+        <div class="gauge">
+          <div class="gauge__track">
+            <div class="gauge__fill" id="gaugeFill"></div>
+          </div>
+          <div class="gauge__ticks">
+            <span>0</span><span>Low</span><span>Moderate</span><span>High</span><span>1</span>
+          </div>
+        </div>
+
+        <p class="result-note" id="resultNote"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="desk__footer">
+    Model-assisted decision &mdash; a human underwriter should confirm before final action.
+  </footer>
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>
