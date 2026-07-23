@@ -18,17 +18,16 @@ The project covers the entire ML lifecycle—from **data preprocessing and explo
 
 # 🚀 Live Demo
 
-https://loan-default-prediction-6sqs.onrender.com/
+
 
 
 ### 🌐 Web Application
 
-> **Live Demo:** **Coming Soon**
 
 **🔗 Live Link:**
 
 ```
-👉 https://YOUR-LIVE-LINK-HERE
+👉 https://loan-default-prediction-6sqs.onrender.com
 ```
 
 *(Replace the above URL after deploying on Render, Railway, AWS, etc.)*
