@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.git
+.gitignore
+archive*/
+*.csv
+!artifacts/*.joblib
+.venv/
+venv/
+.env
